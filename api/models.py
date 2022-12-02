@@ -26,7 +26,7 @@ class User(models.Model):
     password = models.CharField(max_length=12)
     admin = models.BooleanField(default=False)
     def __str__(self) -> str:
-        return self.username
+        return self.ferst_name
 
 class Result_detail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
