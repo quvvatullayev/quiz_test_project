@@ -10,12 +10,12 @@ class Question(models.Model):
     title = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     quetion = models.CharField(max_length=300)
     def __str__(self) -> str:
-        return self.title
+        return self.quetion
 
 class Option(models.Model):
-    question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
     option = models.CharField(max_length=255)
     is_right = models.BooleanField()
+    quetion = models.ForeignKey(Question, on_delete=models.CASCADE)
     def __str__(self) -> str:
         return self.option
 
@@ -36,7 +36,7 @@ class Result_detail(models.Model):
         return self.question_name
 
 class Result(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, )
     quiz_title = models.CharField(max_length=255)
     result_detail_id = models.ForeignKey(Result_detail, on_delete=models.CASCADE)
     def __str__(self) -> str:
