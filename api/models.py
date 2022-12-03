@@ -34,17 +34,17 @@ class User(models.Model):
     admin = models.BooleanField(default=False)
     def __str__(self) -> str:
         return self.ferst_name
+    
+class Result(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, )
+    quiz_title = models.CharField(max_length=255)
+    def __str__(self) -> str:
+        return self.quiz_title
 
 class Result_detail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    result = models.ForeignKey(Result, on_delete=models.CASCADE)
     question_name = models.CharField(max_length=255)
     is_solved = models.BooleanField(default=False)
     def __str__(self) -> str:
         return self.question_name
-
-class Result(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, )
-    quiz_title = models.CharField(max_length=255)
-    result_detail_id = models.ForeignKey(Result_detail, on_delete=models.CASCADE)
-    def __str__(self) -> str:
-        return self.quiz_title

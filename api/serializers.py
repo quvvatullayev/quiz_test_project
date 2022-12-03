@@ -29,15 +29,15 @@ class User_serilaizers(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-class Result_detail_serilaizers(serializers.ModelSerializer):
-    class Meta:
-        user = serializers.PrimaryKeyRelatedField(queryset = User.objects.all)
-        model = Result_detail
-        fields = '__all__'
-
 class Result_serializers(serializers.ModelSerializer):
     class Meta:
         user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-        result_detail_id = serializers.PrimaryKeyRelatedField(queryset=Result_detail.objects.all())
         model = Result
+        fields = '__all__'
+
+class Result_detail_serilaizers(serializers.ModelSerializer):
+    class Meta:
+        user = serializers.PrimaryKeyRelatedField(queryset = User.objects.all)
+        result_id = serializers.PrimaryKeyRelatedField(queryset=Result.objects.all())
+        model = Result_detail
         fields = '__all__'
