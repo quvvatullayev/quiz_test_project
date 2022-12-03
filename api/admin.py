@@ -5,7 +5,8 @@ from .models import (
     Option,
     User,
     Result_detail,
-    Result
+    Result,
+    Topic
 )
 
 # Register your models here.
@@ -15,3 +16,4 @@ admin.site.register(Result_detail)
 admin.site.register(Quiz)
 admin.site.register(Question)
 admin.site.register(Option)
+admin.site.register(Topic)

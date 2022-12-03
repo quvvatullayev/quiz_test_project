@@ -6,9 +6,15 @@ class Quiz_serilaizers(serializers.ModelSerializer):
         model = Quiz
         fields = '__all__'
 
-class Question_serilaizers(serializers.ModelSerializer):
+class Topic_cerilaizers(serializers.ModelSerializer):
     class Meta:
         title = serializers.PrimaryKeyRelatedField(queryset=Quiz.objects.all())
+        model = Topic
+        fields = '__all__'
+
+class Question_serilaizers(serializers.ModelSerializer):
+    class Meta:
+        p_name = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all())
         model = Question
         fields = '__all__'
 

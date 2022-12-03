@@ -6,8 +6,15 @@ class Quiz(models.Model):
     def __str__(self) -> str:
         return self.title
 
-class Question(models.Model):
+class Topic(models.Model):
     title = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    p_name = models.CharField(max_length=50)
+    def __str__(self) -> str:
+        return self.p_name
+
+
+class Question(models.Model):
+    p_name = models.ForeignKey(Topic, on_delete=models.CASCADE)
     quetion = models.CharField(max_length=300)
     def __str__(self) -> str:
         return self.quetion

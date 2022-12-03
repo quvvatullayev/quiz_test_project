@@ -19,6 +19,16 @@ class Create_quiz(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
+class Create_topic(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request:Request):
+        data = request.data
+        serializer = Topic_cerilaizers(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
 class Create_question(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request:Request):

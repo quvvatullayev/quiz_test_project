@@ -5,7 +5,8 @@ from .views import (
     Create_optione,
     Create_user,
     Create_Result_detail,
-    Create_Result
+    Create_Result,
+    Create_topic
     )
 
 urlpatterns = [
@@ -14,5 +15,6 @@ urlpatterns = [
     path('create_optione/', Create_optione.as_view()),
     path('create_user/', Create_user.as_view()),
     path('create_result_detail/', Create_Result_detail.as_view()),
-    path('create_result/', Create_Result.as_view())
+    path('create_result/', Create_Result.as_view()),
+    path('creat_topic/', Create_topic.as_view())
 ]
