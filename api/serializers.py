@@ -15,23 +15,23 @@ class Question_serilaizers(serializers.ModelSerializer):
 class Option_serilaizers(serializers.ModelSerializer):
     class Meta:
         quetion = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all())
-        model = Question
-        fields = '__all__'
+        model = Option
+        fields = "__all__"
         
-# class User_serilaizers(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = '__all__'
+class User_serilaizers(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
-# class Result_detail_serilaizers(serializers.ModelSerializer):
-#     class Meta:
-#         user = serializers.PrimaryKeyRelatedField(queryset = User.objects.all)
-#         model = Result_detail
-#         fields = '__all__'
+class Result_detail_serilaizers(serializers.ModelSerializer):
+    class Meta:
+        user = serializers.PrimaryKeyRelatedField(queryset = User.objects.all)
+        model = Result_detail
+        fields = '__all__'
 
-# class Result_serializers(serializers.ModelSerializer):
-#     class Meta:
-#         user_id = serializers.PrimaryKeyRelatedField(slug_field = 'id', queryset=User.objects.all())
-#         result_detail_id = serializers.PrimaryKeyRelatedField(slug_field = 'id', queryset=Result_detail.objects.all())
-#         model = Result
-#         fields = '__all__'
+class Result_serializers(serializers.ModelSerializer):
+    class Meta:
+        user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+        result_detail_id = serializers.PrimaryKeyRelatedField(queryset=Result_detail.objects.all())
+        model = Result
+        fields = '__all__'
