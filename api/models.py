@@ -7,7 +7,7 @@ class Quiz(models.Model):
         return self.title
 
 class Topic(models.Model):
-    title = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     p_name = models.CharField(max_length=50)
     def __str__(self) -> str:
         return self.p_name

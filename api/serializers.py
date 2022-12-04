@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from api.models import *
+from api.models import (
+    Quiz,
+    Topic,
+    Question,
+    Option,
+    User,
+    Result,
+    Result_detail
+)
 
 class Quiz_serilaizers(serializers.ModelSerializer):
     class Meta:
@@ -8,7 +16,7 @@ class Quiz_serilaizers(serializers.ModelSerializer):
 
 class Topic_serilaizers(serializers.ModelSerializer):
     class Meta:
-        title = serializers.PrimaryKeyRelatedField(queryset=Quiz.objects.all())
+        quiz = serializers.PrimaryKeyRelatedField(queryset=Quiz.objects.all())
         model = Topic
         fields = '__all__'
 

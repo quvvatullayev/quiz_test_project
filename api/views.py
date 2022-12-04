@@ -1,4 +1,3 @@
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request 
 from rest_framework import status
@@ -96,28 +95,24 @@ class Create_Result(APIView):
         return Response(serializer.errors)
 
 class Quiz_list(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, requset:Request):
         quiz = Quiz.objects.all()
         serilaizer = Quiz_serilaizers(quiz, many = True)
         return Response(serilaizer.data)
 
 class Topic_list(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def get(self, request:Request, pk):
-        quiz = Quiz.objects.filter(id = pk)
-        topic = Topic.objects.filter(title = quiz)
-        data = []
+        topic = Topic.objects.all()
+        print(topic.get(id= pk))
+        # topic = Topic.objects.filter(quiz)
+        # data = []
         # for i in topic:
-        #     question = Question.objects.filter(topic = i)
-        #     question_serilaizer = Question_serilaizers(question, many = True, context = {'test':1})
-        #     data.append({
-        #         'quiz':i.title,
-        #         'id':i.id,
-        #         'topic':question_serilaizer.data
+        #     data.append(i.p_name)
 
-        #     })
-        return Response({'data':''})
+        
+        return Response({'data':'data'})
 
 
 
