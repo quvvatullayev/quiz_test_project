@@ -2,8 +2,24 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request 
 from rest_framework import status
-from .models import *
-from .serializers import *
+from .models import (
+    Quiz, 
+    Topic, 
+    Question, 
+    Option, 
+    User, 
+    Result, 
+    Result_detail
+)
+from .serializers import (
+    Quiz_serilaizers, 
+    Topic_cerilaizers,
+    Question_serilaizers,
+    Option_serilaizers,
+    User_serilaizers,
+    Result_serializers,
+    Result_detail_serilaizers
+)
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
