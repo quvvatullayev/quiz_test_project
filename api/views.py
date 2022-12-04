@@ -94,3 +94,14 @@ class Create_Result(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+class Quiz_list(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, requset:Request):
+        quiz = Quiz.objects.all()
+        serilaizer = Quiz_serilaizers(quiz, many = True)
+        return Response(serilaizer.data)
+
+
+
+
