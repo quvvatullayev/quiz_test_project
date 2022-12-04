@@ -13,7 +13,7 @@ from .models import (
 )
 from .serializers import (
     Quiz_serilaizers, 
-    Topic_cerilaizers,
+    Topic_serilaizers,
     Question_serilaizers,
     Option_serilaizers,
     User_serilaizers,
@@ -39,7 +39,7 @@ class Create_topic(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request:Request):
         data = request.data
-        serializer = Topic_cerilaizers(data=data)
+        serializer = Topic_serilaizers(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -101,6 +101,23 @@ class Quiz_list(APIView):
         quiz = Quiz.objects.all()
         serilaizer = Quiz_serilaizers(quiz, many = True)
         return Response(serilaizer.data)
+
+class Topic_list(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request:Request, pk):
+        quiz = Quiz.objects.filter(id = pk)
+        topic = Topic.objects.filter(title = quiz)
+        data = []
+        # for i in topic:
+        #     question = Question.objects.filter(topic = i)
+        #     question_serilaizer = Question_serilaizers(question, many = True, context = {'test':1})
+        #     data.append({
+        #         'quiz':i.title,
+        #         'id':i.id,
+        #         'topic':question_serilaizer.data
+
+        #     })
+        return Response({'data':''})
 
 
 

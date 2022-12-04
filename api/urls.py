@@ -8,6 +8,7 @@ from .views import (
     Create_Result,
     Create_topic,
     Quiz_list,
+    Topic_list,
     )
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     path('create_result/', Create_Result.as_view()),
     path('creat_topic/', Create_topic.as_view()),
     path('quiz_list/', Quiz_list.as_view()),
+    path('topic_list/<int:pk>/', Topic_list.as_view()),
 ]
