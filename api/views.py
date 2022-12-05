@@ -109,25 +109,60 @@ class Topic_list(APIView):
         serilaizer1 = Quiz_serilaizers(quiz, many = False)
         serilaizer = Topic_serilaizers(topic, many = True)
 
-        return Response([serilaizer1.data,serilaizer.data])
+        data = {
+            'quiz':serilaizer1.data,
+            'topic':serilaizer.data
+        }
+
+        return Response(data)
 
 class Question_list(APIView):
     def get(self, request:Request, pk):
         topic = Topic.objects.get(id = pk)
         question = Question.objects.filter(t_name = topic)
+
         serilaizer1 = Topic_serilaizers(topic, many = False)
+
+        pk_quiz = serilaizer1.data.get('quiz')
+        quiz = Quiz.objects.get(id = pk_quiz)
+        serilaizer2 = Quiz_serilaizers(quiz, many = False)
+
         serilaizer = Question_serilaizers(question, many = True)
 
-        return Response([serilaizer1.data,serilaizer.data])
+        data = {
+            'quiz':serilaizer2.data,
+            'topic':serilaizer1.data,
+            'question':serilaizer.data
+        }
+
+
+        return Response(data)
 
 class Option_list(APIView):
     def get(self, request:Request, pk):
         question = Question.objects.get(id = pk)
         option = Option.objects.filter(quetion = question)
+    
         serilaizer1 = Question_serilaizers(question, many = False)
-        serilaizer = Option_serilaizers(option, many = True)
+    
+        tupic_id = serilaizer1.data.get('t_name')
+        tupic = Topic.objects.get(id = tupic_id)
+        serilaizer2 = Topic_serilaizers(tupic, many = False)
+    
+        quiz_id = serilaizer2.data.get('quiz')
+        quiz = Quiz.objects.get(id = quiz_id)
+        serilaizer3 = Quiz_serilaizers(quiz, many = False)
 
-        return Response([serilaizer1.data,serilaizer.data])
+        serilaizer4 = Option_serilaizers(option, many = True)
+
+        data = {
+            'quiz':serilaizer3.data,
+            'topic':serilaizer2.data,
+            'question':serilaizer1.data,
+            'option':serilaizer4.data
+        }
+
+        return Response(data)
 
 
 
