@@ -22,7 +22,7 @@ class Topic_serilaizers(serializers.ModelSerializer):
 
 class Question_serilaizers(serializers.ModelSerializer):
     class Meta:
-        p_name = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all())
+        t_name = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all())
         model = Question
         fields = '__all__'
 

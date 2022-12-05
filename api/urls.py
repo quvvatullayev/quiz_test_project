@@ -9,6 +9,8 @@ from .views import (
     Create_topic,
     Quiz_list,
     Topic_list,
+    Question_list,
+    
     )
 
 urlpatterns = [
@@ -21,4 +23,5 @@ urlpatterns = [
     path('creat_topic/', Create_topic.as_view()),
     path('quiz_list/', Quiz_list.as_view()),
     path('topic_list/<int:pk>/', Topic_list.as_view()),
+    path('question_list/<int:pk>/', Question_list.as_view()),
 ]

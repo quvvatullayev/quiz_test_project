@@ -108,8 +108,19 @@ class Topic_list(APIView):
         topic = Topic.objects.filter(quiz = quiz[0])
         serilaizer1 = Quiz_serilaizers(quiz[0], many = False)
         serilaizer = Topic_serilaizers(topic, many = True)
-                
+
         return Response([serilaizer1.data,serilaizer.data])
+
+class Question_list(APIView):
+    def get(self, request:Request, pk):
+        topic = Topic.objects.filter(id = pk)
+        question = Question.objects.filter(t_name = topic[0])
+        serilaizer1 = Topic_serilaizers(topic[0], many = False)
+        serilaizer = Question_serilaizers(question, many = True)
+
+        return Response([serilaizer1.data,serilaizer.data])
+
+
 
 
 
