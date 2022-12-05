@@ -104,19 +104,28 @@ class Quiz_list(APIView):
 class Topic_list(APIView):
     # permission_classes = [IsAuthenticated]
     def get(self, request:Request, pk):
-        quiz = Quiz.objects.filter(id = pk)
-        topic = Topic.objects.filter(quiz = quiz[0])
-        serilaizer1 = Quiz_serilaizers(quiz[0], many = False)
+        quiz = Quiz.objects.get(id = pk)
+        topic = Topic.objects.filter(quiz = quiz)
+        serilaizer1 = Quiz_serilaizers(quiz, many = False)
         serilaizer = Topic_serilaizers(topic, many = True)
 
         return Response([serilaizer1.data,serilaizer.data])
 
 class Question_list(APIView):
     def get(self, request:Request, pk):
-        topic = Topic.objects.filter(id = pk)
-        question = Question.objects.filter(t_name = topic[0])
-        serilaizer1 = Topic_serilaizers(topic[0], many = False)
+        topic = Topic.objects.get(id = pk)
+        question = Question.objects.filter(t_name = topic)
+        serilaizer1 = Topic_serilaizers(topic, many = False)
         serilaizer = Question_serilaizers(question, many = True)
+
+        return Response([serilaizer1.data,serilaizer.data])
+
+class Option_list(APIView):
+    def get(self, request:Request, pk):
+        question = Question.objects.get(id = pk)
+        option = Option.objects.filter(quetion = question)
+        serilaizer1 = Question_serilaizers(question, many = False)
+        serilaizer = Option_serilaizers(option, many = True)
 
         return Response([serilaizer1.data,serilaizer.data])
 
