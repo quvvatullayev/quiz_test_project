@@ -104,15 +104,12 @@ class Quiz_list(APIView):
 class Topic_list(APIView):
     # permission_classes = [IsAuthenticated]
     def get(self, request:Request, pk):
-        topic = Topic.objects.all()
-        print(topic.get(id= pk))
-        # topic = Topic.objects.filter(quiz)
-        # data = []
-        # for i in topic:
-        #     data.append(i.p_name)
-
-        
-        return Response({'data':'data'})
+        quiz = Quiz.objects.filter(id = pk)
+        topic = Topic.objects.filter(quiz = quiz[0])
+        serilaizer1 = Quiz_serilaizers(quiz[0], many = False)
+        serilaizer = Topic_serilaizers(topic, many = True)
+                
+        return Response([serilaizer1.data,serilaizer.data])
 
 
 
