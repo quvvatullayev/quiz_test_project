@@ -30,7 +30,7 @@ class Option_serilaizers(serializers.ModelSerializer):
     class Meta:
         quetion = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all())
         model = Option
-        fields = ["id","option","quetion"]
+        fields = '__all__'
         
 class User_serilaizers(serializers.ModelSerializer):
     class Meta:

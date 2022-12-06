@@ -8,9 +8,9 @@ class Quiz(models.Model):
 
 class Topic(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    t_name = models.CharField(max_length=50)
+    t_name = models.CharField(max_length=60)
     def __str__(self) -> str:
-        return self.p_name
+        return self.t_name
 
 
 class Question(models.Model):
