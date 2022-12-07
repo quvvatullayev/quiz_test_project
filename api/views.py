@@ -135,7 +135,6 @@ class Question_list(APIView):
             'question':serilaizer.data
         }
 
-
         return Response(data)
 
 class Option_list(APIView):
@@ -207,7 +206,6 @@ class Result_detail_list(APIView):
             'result':serilaizer2.data,
             'result_detail':serilaizer3.data
         }
-
         
         return Response(data)
 
