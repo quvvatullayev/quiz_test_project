@@ -176,5 +176,19 @@ class User_list(APIView):
         serilaizer = User_serilaizers(user, many = False)
         return Response(serilaizer.data)
 
+class Result_list(APIView):
+    def get(self, request:Request, pk):
+        user = User.objects.get(id = pk)
+        result = Result.objects.filter(user_id = user)
+        serilaizer1 = User_serilaizers(user, many = False)
+        serilaizer2 = Result_serializers(result, many = True)
+
+        data = {
+            'user':serilaizer1.data,
+            'result':serilaizer2.data
+        }
+
+        return Response(data)
+
 
 
