@@ -180,7 +180,7 @@ class Result_list(APIView):
     def get(self, request:Request, pk):
         user = User.objects.get(id = pk)
         result = Result.objects.filter(user_id = user)
-        serilaizer1 = User_serilaizers(user, many = False)
+        serilaizer1 = User_serilaizers(user, many = True)
         serilaizer2 = Result_serializers(result, many = True)
 
         data = {
@@ -189,6 +189,28 @@ class Result_list(APIView):
         }
 
         return Response(data)
+
+class Result_detail_list(APIView):
+    def get(self, request:Request, pk):
+        resutl = Result.objects.get(id = pk)
+        result_detail = Result_detail.objects.filter(result = resutl)
+
+        serilaizer2 = Result_serializers(resutl, many = False)
+        serilaizer3 = Result_detail_serilaizers(result_detail, many = True)
+
+        user_id = serilaizer2.data['user_id']
+        user = User.objects.get(id = user_id)
+        serilaizer1 = User_serilaizers(user, many = False)
+
+        data = {
+            'user':serilaizer1.data,
+            'result':serilaizer2.data,
+            'result_detail':serilaizer3.data
+        }
+
+        
+        return Response(data)
+
 
 
 
