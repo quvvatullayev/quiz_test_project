@@ -164,8 +164,11 @@ class Option_list(APIView):
 
         return Response(data)
 
-
-
+class Users_list(APIView):
+    def get(self, request:Request):
+        user = User.objects.all()
+        serilaizer = User_serilaizers(user, many = True)
+        return Response(serilaizer.data)
 
 
 
