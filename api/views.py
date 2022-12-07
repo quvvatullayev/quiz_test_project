@@ -170,5 +170,11 @@ class Users_list(APIView):
         serilaizer = User_serilaizers(user, many = True)
         return Response(serilaizer.data)
 
+class User_list(APIView):
+    def get(self, request:Request, pk):
+        user = User.objects.get(id = pk)
+        serilaizer = User_serilaizers(user, many = False)
+        return Response(serilaizer.data)
+
 
 

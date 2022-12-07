@@ -12,6 +12,7 @@ from .views import (
     Question_list,
     Option_list,
     Users_list,
+    User_list,
     )
 
 urlpatterns = [
@@ -26,5 +27,6 @@ urlpatterns = [
     path('topic_list/<int:pk>/', Topic_list.as_view()),
     path('question_list/<int:pk>/', Question_list.as_view()),
     path('option_list/<int:pk>/', Option_list.as_view()),
-    path('user_list/', Users_list.as_view()),
+    path('users_list/', Users_list.as_view()),
+    path('user_list/<int:pk>/', User_list.as_view())
 ]
