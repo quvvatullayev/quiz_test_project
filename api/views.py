@@ -104,62 +104,42 @@ class Quiz_list(APIView):
 class Topic_list(APIView):
     # permission_classes = [IsAuthenticated]
     def get(self, request:Request, pk):
-        quiz = Quiz.objects.get(id = pk)
-        topic = Topic.objects.filter(quiz = quiz)
-        serilaizer1 = Quiz_serilaizers(quiz, many = False)
-        serilaizer = Topic_serilaizers(topic, many = True)
+        quiz_filter = Quiz.objects.get(id = pk)
+        quiz = Quiz_serilaizers(quiz_filter, many = False)
+
+        topic_filter = Topic.objects.filter(quiz = quiz.data['id'])
+        topic = Topic_serilaizers(topic_filter, many = True)
 
         data = {
-            'quiz':serilaizer1.data,
-            'topic':serilaizer.data
+            'quiz':{
+                'id':quiz.data['id'],
+                'title':quiz.data['title'],
+                'topics':topic.data
+                }
         }
 
         return Response(data)
 
 class Question_list(APIView):
     def get(self, request:Request, pk):
-        topic = Topic.objects.get(id = pk)
-        question = Question.objects.filter(t_name = topic)
+        topic_filter = Topic.objects.get(id = pk)
+        topic = Topic_serilaizers(topic_filter, many = False)
 
-        serilaizer1 = Topic_serilaizers(topic, many = False)
+        question_filter = Question.objects.filter(t_name = topic.data['id'])
+        question = Question_serilaizers(question_filter, many = True)
 
-        pk_quiz = serilaizer1.data.get('quiz')
-        quiz = Quiz.objects.get(id = pk_quiz)
-        serilaizer2 = Quiz_serilaizers(quiz, many = False)
+        data = []
 
-        serilaizer = Question_serilaizers(question, many = True)
-
-        data = {
-            'quiz':serilaizer2.data,
-            'topic':serilaizer1.data,
-            'question':serilaizer.data
-        }
-
-        return Response(data)
-
-class Option_list(APIView):
-    def get(self, request:Request, pk):
-        question = Question.objects.get(id = pk)
-        option = Option.objects.filter(quetion = question)
-    
-        serilaizer1 = Question_serilaizers(question, many = False)
-    
-        tupic_id = serilaizer1.data.get('t_name')
-        tupic = Topic.objects.get(id = tupic_id)
-        serilaizer2 = Topic_serilaizers(tupic, many = False)
-    
-        quiz_id = serilaizer2.data.get('quiz')
-        quiz = Quiz.objects.get(id = quiz_id)
-        serilaizer3 = Quiz_serilaizers(quiz, many = False)
-
-        serilaizer4 = Option_serilaizers(option, many = True)
-
-        data = {
-            'quiz':serilaizer3.data,
-            'topic':serilaizer2.data,
-            'question':serilaizer1.data,
-            'option':serilaizer4.data
-        }
+        for i in question.data:
+            option_filter = Option.objects.filter(id = i['id'])
+            option = Option_serilaizers(option_filter, many = True)
+            print(option.data)
+            data.append({
+                'id':i['id'],
+                'question':i['quetion'],
+                'topic_id':i['t_name'],
+                "optons":option.data
+            })
 
         return Response(data)
 
