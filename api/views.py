@@ -125,16 +125,22 @@ class Question_list(APIView):
         topic_filter = Topic.objects.get(id = pk)
         topic = Topic_serilaizers(topic_filter, many = False)
 
+        quiz_filter = Quiz.objects.get(id = topic.data['id'])
+        quiz = Quiz_serilaizers(quiz_filter, many = False)
+
         question_filter = Question.objects.filter(t_name = topic.data['id'])
         question = Question_serilaizers(question_filter, many = True)
 
-        data = []
+        data = {
+            "id":quiz.data['id'], 
+            'title':quiz.data['title'],
+            'questions':[]
+            }
 
         for i in question.data:
             option_filter = Option.objects.filter(id = i['id'])
             option = Option_serilaizers(option_filter, many = True)
-            print(option.data)
-            data.append({
+            data['questions'].append({
                 'id':i['id'],
                 'question':i['quetion'],
                 'topic_id':i['t_name'],
