@@ -136,7 +136,7 @@ class Question_list(APIView):
             'title':quiz.data['title'],
             "topic":{
                 'id':topic.data["id"], 
-                'topic name':topic.data['t_name'],
+                'topic_name':topic.data['t_name'],
                 'questions':[]
                 }
             }

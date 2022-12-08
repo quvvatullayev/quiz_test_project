@@ -36,8 +36,9 @@ class User(models.Model):
         return self.ferst_name
     
 class Result(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, )
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     quiz_title = models.CharField(max_length=255)
+    topic_name = models.CharField(max_length=255)
     def __str__(self) -> str:
         return self.quiz_title
 
