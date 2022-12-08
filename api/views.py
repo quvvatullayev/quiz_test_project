@@ -138,7 +138,7 @@ class Question_list(APIView):
             }
 
         for i in question.data:
-            option_filter = Option.objects.filter(id = i['id'])
+            option_filter = Option.objects.filter(quetion = i['id'])
             option = Option_serilaizers(option_filter, many = True)
             data['questions'].append({
                 'id':i['id'],
