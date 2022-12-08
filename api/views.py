@@ -134,13 +134,17 @@ class Question_list(APIView):
         data = {
             "id":quiz.data['id'], 
             'title':quiz.data['title'],
-            'questions':[]
+            "topic":{
+                'id':topic.data["id"], 
+                'topic name':topic.data['t_name'],
+                'questions':[]
+                }
             }
 
         for i in question.data:
             option_filter = Option.objects.filter(quetion = i['id'])
             option = Option_serilaizers(option_filter, many = True)
-            data['questions'].append({
+            data['topic']['questions'].append({
                 'id':i['id'],
                 'question':i['quetion'],
                 'topic_id':i['t_name'],
