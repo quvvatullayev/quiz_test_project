@@ -206,6 +206,10 @@ class Result_detail_list(APIView):
         
         return Response(data)
 
+class Option_chict(APIView):
+    def get(self, request:Request, pk):
+        option_filter = Option.objects.get(id = pk)
+        return Response({"chict":option_filter.is_right})
 
 
 

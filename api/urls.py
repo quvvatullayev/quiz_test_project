@@ -14,6 +14,7 @@ from .views import (
     User_list,
     Result_list,
     Result_detail_list,
+    Option_chict,
     )
 
 urlpatterns = [
@@ -31,4 +32,5 @@ urlpatterns = [
     path('user_list/<int:pk>/', User_list.as_view()),
     path('result_list/<int:pk>/', Result_list.as_view()),
     path('result_detail_list/<int:pk>/', Result_detail_list.as_view()),
+    path('option_chict/<int:pk>/', Option_chict.as_view())
 ]
