@@ -65,17 +65,21 @@ class Create_optione(APIView):
         return Response(serializer.errors)
 
 class Create_user(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def post(self, request:Request):
         data = request.data
+        print(type(data))
+        print(data['email'])
         serializer = User_serilaizers(data=data)
         if serializer.is_valid():
             serializer.save()
+            print(serializer.data)
             return Response(serializer.data)
+        print('error')
         return Response(serializer.errors)
 
 class Create_Result_detail(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def post(self, request:Request):
         data = request.data
         serializer = Result_detail_serilaizers(data=data)
@@ -85,7 +89,7 @@ class Create_Result_detail(APIView):
         return Response(serializer.errors)
 
 class Create_Result(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     def post(self, request:Request):
         data = request.data
         serializer = Result_serializers(data=data)
@@ -157,7 +161,10 @@ class Users_list(APIView):
     def get(self, request:Request):
         user = User.objects.all()
         serilaizer = User_serilaizers(user, many = True)
-        return Response(serilaizer.data)
+        data = {
+            "user_listis":serilaizer.data
+        }
+        return Response(data)
 
 class User_list(APIView):
     def get(self, request:Request, pk):
