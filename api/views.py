@@ -211,5 +211,14 @@ class Option_chict(APIView):
         option_filter = Option.objects.get(id = pk)
         return Response({"chict":option_filter.is_right})
 
+class Chict_all(APIView):
+    def get(self, request:Request, pk, rk):
+        result_detail_user = Result_detail.objects.filter(user = pk)
+        result_detail_result = result_detail_user.filter(result = rk)
+        t = 0
+        f = 0
+        for i in result_detail_user.all()["is_solved"]:
+            print(i)
+
 
 
