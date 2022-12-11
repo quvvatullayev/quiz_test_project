@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.request import Request 
 from rest_framework import status
+import pprint
 from .models import (
     Quiz, 
     Topic, 
@@ -213,12 +214,17 @@ class Option_chict(APIView):
 
 class Chict_all(APIView):
     def get(self, request:Request, pk, rk):
-        result_detail_user = Result_detail.objects.filter(user = pk)
-        result_detail_result = result_detail_user.filter(result = rk)
-        t = 0
+        result = Result.objects.get(id = rk)
+        result_detail = Result_detail.objects.filter(result = result)
+        result_detail_serilaizer = Result_detail_serilaizers(result_detail, many = True)
         f = 0
-        for i in result_detail_user.all()["is_solved"]:
-            print(i)
+        t = 0
+        for i in result_detail_serilaizer.data:
+            if i['is_solved'] == False:
+                f += 1
+            elif i['is_solved'] == True:
+                t += 1
+        return Response({"True":t, "False":f})
 
 
 
