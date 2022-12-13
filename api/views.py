@@ -130,7 +130,7 @@ class Question_list(APIView):
         topic_filter = Topic.objects.get(id = pk)
         topic = Topic_serilaizers(topic_filter, many = False)
 
-        quiz_filter = Quiz.objects.get(id = topic.data['id'])
+        quiz_filter = Quiz.objects.get(id = topic.data['quiz'])
         quiz = Quiz_serilaizers(quiz_filter, many = False)
 
         question_filter = Question.objects.filter(t_name = topic.data['id'])
