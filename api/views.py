@@ -142,6 +142,7 @@ class Question_list(APIView):
             "topic":{
                 'id':topic.data["id"], 
                 'topic_name':topic.data['t_name'],
+                'question_index_list':list(range(1, len(question.data)+1)),
                 'questions':[]
                 }
             }

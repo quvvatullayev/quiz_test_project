@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (
+from api.views import (
     Create_quiz,
     Create_question,
     Create_optione,
@@ -16,7 +16,7 @@ from .views import (
     Result_detail_list,
     Option_chict,
     Result_detail,
-    Chict_all
+    Chict_all,
     )
 
 urlpatterns = [
