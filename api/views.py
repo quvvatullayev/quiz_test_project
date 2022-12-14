@@ -69,12 +69,9 @@ class Create_user(APIView):
     # permission_classes = [IsAuthenticated]
     def post(self, request:Request):
         data = request.data
-        print(type(data))
-        print(data['email'])
         serializer = User_serilaizers(data=data)
         if serializer.is_valid():
             serializer.save()
-            print(serializer.data)
             return Response(serializer.data)
         print('error')
         return Response(serializer.errors)
